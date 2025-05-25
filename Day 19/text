@@ -1,0 +1,47 @@
+229. Majority Element II(Medium)
+
+
+**Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+ 
+
+**Example 1:
+
+**Input: nums = [3,2,3]
+**Output: [3]
+**Example 2:
+
+**Input: nums = [1]
+**Output: [1]
+**Example 3:
+
+**Input: nums = [1,2]
+**Output: [1,2]
+*******************************************************************************************************
+**Intuition
+-To find all elements that appear more than ⌊n/3⌋ times in the array, we can leverage the Extended Boyer-Moore Voting Algorithm.
+-At most, there can be two majority elements that occur more than n/3 times in the array. 
+-So, we track two potential candidates and their counts, and finally verify their actual counts in a second pass.
+
+**Approach
+-Use two variables to store potential majority elements (ele1 and ele2), along with their counts (cnt1 and cnt2).
+
+-In the first pass through the array:
+
+-If the count for an element is zero and it doesn't match the other element, assign it as a new candidate.
+
+-If the element matches one of the candidates, increment the corresponding count.
+
+-If it matches neither and both counts are non-zero, decrement both counts.
+
+-In the second pass, count the actual occurrences of both candidates to confirm if they appear more than ⌊n/3⌋ times.
+
+-Add valid candidates to the result list.
+
+**Complexity
+**Time complexity:
+-O(n) — Two passes over the array.
+
+**Space complexity:
+-O(1)) — Constant extra space (excluding the output list).
+
