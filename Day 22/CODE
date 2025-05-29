@@ -1,0 +1,28 @@
+Intuition💡:
+  Iterative Approach:
+  Use two pointers: prev (starts as null) and curr (starts at head).
+  At each step:
+  1 . Store curr.next in temp.
+  2 . Reverse curr.next to point to prev.
+  3 . Move prev to curr and curr to temp.
+  Repeat until curr is null.
+  prev becomes the new head of the reversed list.
+  Visualization:
+  Original list : 1 -> 2 -> 3 -> 4 -> 5 ->null
+  Reversed list : 5 -> 4 -> 3 -> 2 -> 1 -> null
+
+**CODE
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+    ListNode prev=null;
+    ListNode curr=head;
+    while(curr!=null){
+        ListNode  temp=curr.next;    
+        curr.next=prev;              
+         prev = curr;                
+        curr=temp;                   
+    }
+    return prev;
+    }
+}
