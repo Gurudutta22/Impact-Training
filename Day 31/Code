@@ -1,0 +1,35 @@
+*Intuition
+-We are given a triangle, and we need to find the minimum path sum from the top to the bottom. At each step, we can only move to adjacent numbers on the row below.
+
+*Approach
+-I used Top-down Tabulation DP, which means I started from the top of the triangle and filled the DP table row by row.
+
+-dp[i][j] represents the minimum path sum to reach element (i, j) in the triangle.
+-For each cell in the triangle, the value is calculated as:
+
+-If it's the first element in the row, it can only come from dp[i-1][j].
+
+-Otherwise, it can come from either dp[i-1][j-1] or dp[i-1][j].
+
+-After filling the table, the minimum value in the last row of dp gives the result.
+
+Complexity
+Time complexity: O(n^2)
+Space complexity: O(n^2)
+
+CODE:
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice = prices[0];
+        int maxProfit = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            minPrice = Math.min(minPrice, prices[i]);
+                int profit = prices[i] - minPrice;
+            maxProfit = Math.max(maxProfit, profit);
+            
+        }
+
+        return maxProfit;
+    }
+}
