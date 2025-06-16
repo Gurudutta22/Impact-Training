@@ -1,0 +1,51 @@
+*Intuition :
+The merge operation for two sorted lists is a well-known problem. If we repeatedly merge pairs of lists, the number of lists reduces by half after each pass.
+This divide-and-conquer approach has a logarithmic number of merging passes ( log k ), and each merge operation processes N total nodes.
+
+*Algorithm :
+Divide: Split the ( k ) lists into pairs and recursively merge them.
+Conquer: Merge two sorted lists at each step using a helper function.
+Repeat the process until only one merged list remains.
+*Steps in Code :
+Use a helper function to merge two sorted linked lists.
+Implement a recursive function that divides the list of linked lists into two halves until the base case is reached (a single list or empty list).
+Merge the two halves recursively.
+Return the final merged list.
+*Complexity :
+-Time Complexity: O(N log k)
+( N ): Total number of nodes across all lists.
+( log k ): Number of levels in the divide-and-conquer recursion tree.
+-Space Complexity: O(log k) due to recursive function calls.
+
+
+
+CODE:
+import java.util.List;
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+    }
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists.length == 0) return null;
+        return divideAndConquer(lists, 0, lists.length - 1);
+    }
+
+    private ListNode divideAndConquer(ListNode[] lists, int left, int right) {
+        if (left == right) return lists[left];
+
+        int mid = left + (right - left) / 2;
+        ListNode l1 = divideAndConquer(lists, left, mid);
+        ListNode l2 = divideAndConquer(lists, mid + 1, right);
+        return mergeTwoLists(l1, l2);
+    }
+}
